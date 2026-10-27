@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -21,27 +22,21 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val header = findViewById<TextView>(R.id.main_header)
-        val name = findViewById<EditText>(R.id.main_name)
-        val second_name = findViewById<EditText>(R.id.main_second_name)
-        val last_name = findViewById<EditText>(R.id.main_last_name)
-        val full_name = findViewById<EditText>(R.id.main_full_name)
-        val sum_button = findViewById<Button>(R.id.main_sum_button)
+        val userLogin: EditText = this.findViewById(R.id.user_name)
+        val userEmail: EditText = this.findViewById(R.id.user_email)
+        val userPassword: EditText = this.findViewById(R.id.user_password)
+        val button: Button = this.findViewById(R.id.primary_button)
 
-        sum_button.setOnClickListener {
-            val nameText = name.text.toString().trim()
-            val secondNameText = second_name.text.toString().trim()
-            val lastNameText = last_name.text.toString().trim()
+        button.setOnClickListener {
+            val login = userLogin.text.toString().trim()
+            val email = userEmail.text.toString().trim()
+            val password = userPassword.text.toString().trim()
 
-            if (nameText.isEmpty() || secondNameText.isEmpty() || lastNameText.isEmpty()) {
-                header.text = "Заполните все поля!"
-                return@setOnClickListener
+            if (login == "" || email == "" || password == "")
+                Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
+            else {
+                val new_user = User(login, email, password)
             }
-
-            // Фамилия Имя Отчество
-            val result = "$secondNameText $nameText $lastNameText"
-            full_name.setText(result)
-            header.text = "Готово"
         }
     }
 }
