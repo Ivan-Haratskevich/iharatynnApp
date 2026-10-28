@@ -32,10 +32,17 @@ class MainActivity : AppCompatActivity() {
             val email = userEmail.text.toString().trim()
             val password = userPassword.text.toString().trim()
 
-            if (login == "" || email == "" || password == "")
+            if (login == "" || email == "" || password == "") {
                 Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
-            else {
+            } else {
                 val new_user = User(login, email, password)
+
+                val db = DbHelper(this, null)
+                db.addUSer(new_user)
+                Toast.makeText(this, "Пользователь $login добавлен", Toast.LENGTH_LONG).show()
+                userLogin.text.clear()
+                userEmail.text.clear()
+                userPassword.text.clear()
             }
         }
     }
