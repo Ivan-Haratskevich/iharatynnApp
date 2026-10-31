@@ -1,5 +1,6 @@
 package com.example.iharatynnapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -44,6 +45,11 @@ class MainActivity : AppCompatActivity() {
                 userEmail.text.clear()
                 userPassword.text.clear()
             }
+        }
+        val linkToAuth: TextView = findViewById(R.id.linkToAuth)
+        linkToAuth.setOnClickListener {
+            val intent = Intent(this, AuthActivity::class.java)
+            startActivity(intent)
         }
     }
 }
